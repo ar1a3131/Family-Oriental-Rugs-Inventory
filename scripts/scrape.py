@@ -67,12 +67,12 @@ def run():
                 continue
 
         # --- SAVE TO JSON ---
-        with open('oriental_rugs_full.json', 'w', encoding='utf-8') as f:
+        with open('../generated_data/oriental_rugs_full.json', 'w', encoding='utf-8') as f:
             json.dump(all_rugs, f, indent=4, ensure_ascii=False)
             
         print(f"\n✨ SUCCESS! Total rugs scraped: {len(all_rugs)}")
-        print("Data saved to oriental_rugs_full.json")
-        
+        print("Data saved to generated_data/oriental_rugs_full.json")
+
         browser.close()
 
 if __name__ == "__main__":
