@@ -98,6 +98,11 @@ def run():
 
                         img_url = extract_image_url(img_container) or "none"
 
+                        if img_url != "none":
+                            import re
+                            match = re.search(r'(https?://[^\s\'"\)]+)', img_url)
+                            img_url = match.group(0) if match else "none"
+
                         all_rugs.append({
                             "id": total_num_rugs,
                             "name": name,

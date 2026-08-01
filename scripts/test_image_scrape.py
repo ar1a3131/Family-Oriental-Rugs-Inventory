@@ -5,7 +5,7 @@ from playwright.sync_api import sync_playwright
 #because I was struggling to scrape the images/couldn't
 #find the header/attribute that contains the image URLs
 
-#very helpful
+#very
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)  # headed, so you can eyeball it
