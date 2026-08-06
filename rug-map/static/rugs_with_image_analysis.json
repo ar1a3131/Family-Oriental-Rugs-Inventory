@@ -9684,7 +9684,7 @@
     "parsed_data": {
       "width_ft": 9.58333333333,
       "length_ft": 12.5833333333,
-      "regional_style": "Heriz",
+      "regional_style": "Serapi",
       "country_of_origin": "Iran",
       "weave_type": "Hand-Knotted",
       "materials": [
@@ -15264,7 +15264,7 @@
     "parsed_data": {
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Tribal/Geometric",
+      "regional_style": "Serapi",
       "country_of_origin": null,
       "weave_type": null,
       "materials": null,
@@ -23422,7 +23422,7 @@
     "parsed_data": {
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Herize Serapi",
+      "regional_style": "Serapi",
       "country_of_origin": "Persian",
       "weave_type": "Hand-Knotted",
       "materials": [
