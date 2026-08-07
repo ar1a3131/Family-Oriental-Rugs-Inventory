@@ -8,6 +8,14 @@ export const CITY_COORDS = {
   "Heriz": { lat: 38.2482, lng: 47.0722, country: "Iran" },
   "Bijar": { lat: 35.8722, lng: 47.6031, country: "Iran" },
   "Kashan": { lat: 33.9850, lng: 51.4100, country: "Iran" },
-  "Sarouk": { lat: 34.1264, lng: 49.4442, country: "Iran" },
-  "Shirvan": { lat: 39.9330, lng: 48.9286, country: "Iran" }
+  "Sarouk": { lat: 34.4075, lng: 49.50806, country: "Iran" },
+  "Shirvan": { lat: 39.9330, lng: 48.9286, country: "Iran" },
+  "Herat": { lat: 34.3529, lng: 62.2040, country: "Afghanistan" },
+  "Akstafa": { lat: 40.7500, lng: 49.0000, country: "Azerbaijan" },
+  "Bukhara": { lat: 39.7747, lng: 64.4286, country: "Uzbekistan" },
+  "Malayer": { lat: 35.3000, lng: 50.1000, country: "Iran" },
+  "Maimana": { lat: 35.9200, lng: 64.7700, country: "Afghanistan" },
+  "Karaj": { lat: 35.8327, lng: 50.9916, country: "Iran" },
+  "Hotan": { lat: 37.1000, lng: 79.9333, country: "China" },
+  "Qom": { lat: 34.6400, lng: 50.8700, country: "Iran" }
 };

@@ -1,15 +1,16 @@
 import json
 import os
-from playwright.sync_api import sync_playwright
+import re
 import csv
+from urllib.parse import urljoin
+from playwright.sync_api import sync_playwright
 
 
 def extract_image_url(card_root):
     """
     GoDaddy Websites+Marketing commerce cards paint the product photo on a
-    NESTED div (data-ux="Background") inside [data-ux="CommerceCardPicture"],
-    not on the CommerceCardPicture element itself. Check inline style first
-    (fast, reliable), then fall back to computed style.
+    NESTED div (data-ux="Background") inside [data-ux="CommerceCardPicture"].
+    Check inline style first, then fall back to computed style.
     """
     return card_root.evaluate("""(el) => {
         const bgEl = el.querySelector('[data-ux="Background"]') || el;
@@ -27,33 +28,69 @@ def extract_image_url(card_root):
     }""")
 
 
+def detect_total_pages(page):
+    """
+    Scrapes the maximum page number displayed in GoDaddy's pagination control.
+    """
+    try:
+        page.wait_for_selector('[data-ux="GridCell"]', timeout=15000)
+        page.mouse.wheel(0, 5000)
+        page.wait_for_timeout(1500)
+
+        max_page = page.evaluate("""() => {
+            const container = document.querySelector('[data-ux="Pagination"]') || document;
+            const elements = container.querySelectorAll('button, a, span, div');
+            let max = 1;
+            elements.forEach(el => {
+                const text = el.textContent ? el.textContent.trim() : '';
+                if (/^\\d+$/.test(text)) {
+                    const num = parseInt(text, 10);
+                    if (num > max && num < 500) {
+                        max = num;
+                    }
+                }
+            });
+            return max;
+        }""")
+        return max_page
+    except Exception as e:
+        print(f"⚠️ Could not detect page count automatically (defaulting to 1): {e}")
+        return 1
+
+
 def run():
-    # Ensure the output directory exists
-    os.makedirs('../generated_data', exist_ok=True)
+    # Save directly inside current project directory
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(script_dir, '../generated_data')
+    os.makedirs(output_dir, exist_ok=True)
+
+    base_catalog_url = "https://baseerorientalrugs.com/hand-kotted-rugs-sale-1/ols/products"
 
     with sync_playwright() as p:
-        # Suggestion: headless=False if you want to watch the first 2 pages
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
         all_rugs = []
-        total_pages = 58
         total_num_rugs = 1
 
-        for page_num in range(1, total_pages + 1):
-            # URL Check: Often Page 1 is just the base URL
-            if page_num == 1:
-                url = "https://baseerorientalrugs.com/oriental-rugs"
-            else:
-                url = f"https://baseerorientalrugs.com/oriental-rugs/ols/products?page={page_num}"
+        # 1. First Page & Detection
+        print(f"🌐 Navigating to main catalog page to determine total pages...")
+        page.goto(base_catalog_url, timeout=60000, wait_until="domcontentloaded")
+        page.wait_for_timeout(3000)
 
-            print(f"📄 Scraping Page {page_num} of {total_pages}...")
+        total_pages = detect_total_pages(page)
+        print(f"📊 Detected {total_pages} pages in total.\n")
+
+        # 2. Iterate through all pages
+        for page_num in range(1, total_pages + 1):
+            url = f"{base_catalog_url}?page={page_num}"
+            print(f"📄 Scraping Page {page_num} of {total_pages} ({url})...")
 
             try:
-                page.goto(url, timeout=60000)
-                page.wait_for_timeout(5000)  # Increased wait for Page 1 stability
+                page.goto(url, timeout=60000, wait_until="domcontentloaded")
+                page.wait_for_timeout(3000)
 
-                # Scroll is CRITICAL for background-image rendering
+                # Scroll down to ensure background images paint
                 page.mouse.wheel(0, 4000)
                 page.wait_for_timeout(2000)
 
@@ -62,27 +99,29 @@ def run():
                 ).all()
 
                 if not rug_elements:
-                    print(f"   ⚠️ No rugs found on page {page_num}. Check if the URL is correct.")
+                    print(f"   ⚠️ No rugs found on page {page_num}.")
 
                 for rug in rug_elements:
                     try:
                         name = rug.locator('[data-ux="CommerceCardTitle"] h4').first.inner_text().strip()
 
-                        # Price Splitting
+                        # Extract product URL
+                        card_link = rug.locator('a[href*="/ols/products/"]').first
+                        if card_link.count() == 0:
+                            card_link = rug.locator('a').first
+
+                        raw_href = card_link.get_attribute('href') if card_link.count() > 0 else None
+                        product_url = urljoin("https://baseerorientalrugs.com", raw_href) if raw_href else "N/A"
+
+                        # Price parsing
                         price_raw = rug.locator('[data-ux="CommerceCardPriceDisplay"]').first.inner_text().strip()
                         price_parts = price_raw.split()
                         original_price = price_parts[0] if len(price_parts) > 0 else "N/A"
                         sale_price = price_parts[1] if len(price_parts) > 1 else None
 
                         img_container = rug.locator('[data-ux="CommerceCardPicture"]').first
-
-                        # Make sure the card (and its lazy-loaded background image) is
-                        # actually in view before we try to read it.
                         img_container.scroll_into_view_if_needed()
 
-                        # Wait for GoDaddy's own "loaded" signal instead of a blind sleep:
-                        # the nested Background div's data-aid flips to
-                        # "PRODUCT_IMAGE_RENDERED_<name>" once the image is painted.
                         try:
                             page.wait_for_function(
                                 """(el) => {
@@ -91,21 +130,20 @@ def run():
                                            bg.getAttribute('data-aid').startsWith('PRODUCT_IMAGE_RENDERED_');
                                 }""",
                                 arg=img_container.element_handle(),
-                                timeout=5000
+                                timeout=4000
                             )
                         except Exception:
-                            pass  # fall through and try to read whatever's there anyway
+                            pass
 
                         img_url = extract_image_url(img_container) or "none"
-
                         if img_url != "none":
-                            import re
                             match = re.search(r'(https?://[^\s\'"\)]+)', img_url)
                             img_url = match.group(0) if match else "none"
 
                         all_rugs.append({
                             "id": total_num_rugs,
                             "name": name,
+                            "product_url": product_url,
                             "original_price": original_price,
                             "sale_price": sale_price,
                             "image_url": img_url,
@@ -113,47 +151,40 @@ def run():
                         })
                         total_num_rugs += 1
                     except Exception as inner_e:
-                        print(f"      ⚠️ Skipping rug {total_num_rugs} due to: {inner_e}")
+                        print(f"      ⚠️ Skipping item {total_num_rugs}: {inner_e}")
                         continue
 
-                print(f"   ✅ Collected {len(rug_elements)} rugs from this page.")
+                print(f"   ✅ Scraped {len(rug_elements)} items from page {page_num}.")
 
             except Exception as outer_e:
                 print(f"   ❌ Error loading page {page_num}: {outer_e}")
                 continue
 
-        # --- DEDUPLICATION LOGIC ---
+        # --- DEDUPLICATION ---
         seen_names = set()
         deduplicated_rugs = []
-        
-        for index, rug in enumerate(all_rugs, start=1):
+        for rug in all_rugs:
             if rug["name"] not in seen_names:
                 seen_names.add(rug["name"])
-                # Re-index the IDs so they remain sequential (1, 2, 3...) after removing duplicates
                 rug["id"] = len(deduplicated_rugs) + 1
                 deduplicated_rugs.append(rug)
 
-        # --- SAVE TO JSON ---
-        output_path = '../generated_data/oriental_rugs.json'
-        with open(output_path, 'w', encoding='utf-8') as f:
-            # Change all_rugs to deduplicated_rugs here:
+        # --- SAVE FILES ---
+        json_output_path = os.path.join(output_dir, 'oriental_rugs.json')
+        csv_output_path = os.path.join(output_dir, 'oriental_rugs.csv')
+
+        with open(json_output_path, 'w', encoding='utf-8') as f:
             json.dump(deduplicated_rugs, f, indent=4, ensure_ascii=False)
 
-        # --- SAVE TO CSV ---
-        csv_output_path = '../generated_data/oriental_rugs.csv'
         if deduplicated_rugs:
-            # Extract column headers from the keys of the first dictionary
             keys = deduplicated_rugs[0].keys()
-            
             with open(csv_output_path, 'w', newline='', encoding='utf-8') as f:
                 dict_writer = csv.DictWriter(f, fieldnames=keys)
-                dict_writer.writeheader()  # Writes 'id', 'name', 'original_price', etc.
+                dict_writer.writeheader()
                 dict_writer.writerows(deduplicated_rugs)
 
-        # Change the print statement to reflect the deduplicated count:
-        print(f"\n✨ SUCCESS! Total rugs saved (duplicates removed): {len(deduplicated_rugs)}")
-        print(f"Data saved to {output_path}")
-
+        print(f"\n✨ Done! Saved {len(deduplicated_rugs)} unique items across {total_pages} pages.")
+        print(f"📁 Output files saved directly to:\n   - {json_output_path}\n   - {csv_output_path}")
 
         browser.close()
 

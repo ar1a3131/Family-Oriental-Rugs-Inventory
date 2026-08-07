@@ -105,7 +105,7 @@
           html: `
             <div class="pin-badge">
               <span class="pin-count">${rugs.length}</span>
-              <span class="pin-label">$📍 ${cityName}</span>
+              <span class="pin-label">📍 ${cityName}</span>
             </div>
           `,
           iconSize: null,
@@ -352,7 +352,7 @@
   /* City Pins */
   :global(.custom-map-pin) { background: transparent; border: none; }
   :global(.pin-badge) {
-    display: flex; align-items: center; background: #171c71; color: #d9d9d9;
+    display: flex; align-items: center;
     border-radius: 20px; padding: 3px 10px 3px 4px; border: 2px solid #ffffff;
     box-shadow: 0 4px 10px rgba(9, 20, 147, 0.25); cursor: pointer;
   }

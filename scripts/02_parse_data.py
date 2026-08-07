@@ -3,8 +3,7 @@ import os
 import re
 import ollama
 
-# 1. Load your existing JSON data
-input_filepath = "generated_data/oriental_rugs.json"  # Change if your raw file is named differently
+input_filepath = "generated_data/oriental_rugs.json"
 output_filepath = "generated_data/rugs_parsed_complete.json"
 
 if not os.path.exists(input_filepath):
@@ -16,151 +15,146 @@ with open(input_filepath, "r", encoding="utf-8") as f:
 total_records = len(rug_records)
 print(f"🚀 Loaded {total_records} records. Starting extraction pipeline...\n")
 
-# Expanded system prompt for complete metadata extraction
+# Revised System Prompt (Strictly standardized examples and rules)
 system_prompt = """
-You are an expert data extraction assistant specializing in e-commerce catalog parsing. Your task is to process a list of rug listing objects containing title/description strings ("name") and extract specific attributes into a structured JSON object.
+You are an expert data extraction assistant specializing in e-commerce catalog parsing. Your task is to process a rug listing object containing title/description strings ("name") and extract specific attributes into a structured JSON object.
 
 ### Extraction Rules:
 
 1. is_sold (boolean): 
-   - Set to `true` if the title/name starts with or explicitly contains "(SOLD)", "(sold)", "sold", or similar status indicators. Otherwise, set to `false`.
+   - Set to `true` if the title/name explicitly contains "(SOLD)", "(sold)", "sold", or similar status indicators. Otherwise, set to `false`.
 
-2. width_ft (float or null): 
-   - Extract the rug width in feet. Convert inches to decimal feet if necessary (e.g., 8ft 6" = 8.5). If not mentioned, return null.
+2. width_ft (string or null): 
+   - Extract the rug width in feet and inches format as stated (e.g., "8'", "8ft", "5'10\"", "3ft"). Do not output decimal floats. If not mentioned, return null.
 
-3. length_ft (float or null): 
-   - Extract the rug length in feet. Convert inches to decimal feet if necessary (e.g., 10ft 6" = 10.5). If not mentioned, return null.
+3. length_ft (string or null): 
+   - Extract the rug length in feet and inches format as stated (e.g., "10'", "11'4\"", "7'8\"", "15ft 5\""). Do not output decimal floats. If not mentioned, return null.
 
 4. regional_style (string or null): 
-   - Extract the specific design/style name (e.g., "Heriz", "Shirvan", "Serapi", "Oushak", "Kazak", "Tabriz", "Sarouk", "Art Deco"). Capitalize properly. If not mentioned, return null.
+   - Extract the specific design/style name (e.g., "Heriz", "Shirvan", "Serapi", "Oushak", "Caucasian", "Tabriz", "Sarouk", "Art Deco", "Herati", "European", "Bibikabad", "Kermanshah"). Capitalize properly. If not mentioned, return null.
+   If you see "Kazakh", "kazak", "Kazak", or "Caucasian Kazak", assign regional_style to "Caucasian".
 
 5. country_of_origin (string or null): 
-   - Extract the country or overarching geographical origin (e.g., "Persian", "Caucasian", "Afghan", "Turkish", "Chinese", "Indian"). Capitalize properly. If not mentioned, return null.
+   - Extract the modern FULL COUNTRY NAME. 
+   - MAP DEMONYMS AND REGIONS TO OFFICIAL COUNTRY NAMES:
+     - "Persian" / "Persia" -> "Iran"
+     - "Caucasian" / "Caucasus" -> "Azerbaijan"
+     - "Afghan" -> "Afghanistan"
+     - "Turkish" / "Anatolian" -> "Turkey"
+     - "Chinese" -> "China"
+     - "Indian" -> "India"
+     - "Moroccan" -> "Morocco"
+   - Capitalize properly. If not mentioned, return null.
 
 6. weave_type (string or null): 
-   - Extract the weave style (e.g., "Hand-Knotted", "Hand-Woven"). Default to "Hand-Knotted" if "hand knotted" is present in the name. If not mentioned, return null.
+   - Extract weave style (e.g., "Hand-Knotted", "Hand-Woven", "Needle Point"). Default to "Hand-Knotted" if "hand knotted" is present in the name. If not mentioned, return null.
 
 7. materials (array of strings): 
-   - Extract primary material fibers (e.g., ["Wool"], ["Silk"], ["Wool", "Silk"], ["Cotton"]).
+   - Extract primary material fibers mentioned (e.g., ["Wool"], ["Silk"], ["Wool", "Silk"], ["Wool", "Cotton"]).
 
 8. year_produced (string or null): 
-   - Extract the estimated era/year (e.g., "1900s", "1880s", "1930s", "New"). Convert terms like "circa 1900" to "1900s".
+   - Extract the estimated era/year (e.g., "1900s", "1880s", "1930s", "Vintage", "New"). Convert terms like "circa 1900" or "circan 1900" to "1900s".
 
 9. primary_color (string or null): 
-   - Extract key color descriptions mentioned in the text (e.g., "Navy Blue", "Soft Blue", "Gold", "Emerald Green"). If no explicit color is mentioned, return null.
+   - Extract key color descriptions mentioned (e.g., "Navy Blue", "Soft Colors", "Emerald Green", "Gold"). Use words only. If not mentioned, return null.
 
-10. extraction_confidence (float): 
-    - Provide a score from 0.0 to 100.0 representing your confidence in the accuracy of the extracted data based on clarity of the description.
+10. city (string or null):
+    - Extract the specific city/town of origin if mentioned or implied by style (e.g., "Kashan", "Shirvan", "Kermanshah", "Herat", "Tabriz", "Bijar"). If not mentioned, return null.
 
----
-
-### Input Data Format:
-Each item contains an `id`, `name`, `original_price`, `sale_price`, `image_url`, and `source_page`.
-
-### Expected Output Format:
-Return ONLY a valid JSON array containing the original item fields alongside the newly generated `parsed_data` block. Do not include markdown commentary, explanations, or text outside the JSON response.
-
-Example Output Structure:
-[
-  {
-    "id": 20,
-    "name": "(SOLD) Hand Knotted authentic antique Persian Heriz Serapies size 11ft 2\" by 14ft 6\" circa 1900s 100% wool pile and cotton foundation",
-    "original_price": "$45,000.00",
-    "sale_price": "$29,000.00",
-    "image_url": "https://img1.wsimg.com/isteam/ip/6297fd88-bda9-4967-b377-b62716f47e9a/ols/1000024780-8bd8813.jpg",
-    "source_page": 2,
-    "parsed_data": {
-      "is_sold": true,
-      "width_ft": 11.17,
-      "length_ft": 14.5,
-      "regional_style": "Heriz Serapi",
-      "country_of_origin": "Persian",
-      "weave_type": "Hand-Knotted",
-      "materials": [
-        "Wool",
-        "Cotton"
-      ],
-      "year_produced": "1900s",
-      "primary_color": null,
-      "extraction_confidence": 95.0
-    }
-  }
-]
+11. design (string or null):
+    - Extract design pattern motifs if mentioned (e.g., "Heriz", "Somakh", "Medallion", "Geometric", "Floral", "Tribal", "Runner"). If not mentioned, return null.
 
 ---
 
-### Input Data to Process:
-[
-    {
-        "id": 17,
-        "name": "Colletble antique hand knotted authentic Coucasian shirvan design 100% pure wool circan 1900 size 3ft by 4ft",
-        "original_price": "$2,900.00",
-        "sale_price": "$1,750.00",
-        "image_url": "https://img1.wsimg.com/isteam/ip/6297fd88-bda9-4967-b377-b62716f47e9a/ols/1000026960.jpg",
-        "source_page": 2
-    }
-]
+### Expected Output Schema:
+{
+  "is_sold": false,
+  "width_ft": "8ft",
+  "length_ft": "11'4\"",
+  "regional_style": "Heriz",
+  "country_of_origin": "Iran",
+  "weave_type": "Hand-Knotted",
+  "materials": ["Wool", "Cotton"],
+  "year_produced": "1930s",
+  "primary_color": "Soft Colors",
+  "city": "Heriz",
+  "design": "Heriz"
+}
 """
 
-# Common typo quick-fixes before sending to parser/LLM
 TYPO_FIXES = {
     r'\btrible\b': 'tribal',
     r'\bknotted100%\b': 'knotted 100%',
+    r'\bBeluchi\b': 'Baloch',
+    r'\bcircan\b': 'circa',
+    r'\bCoucasian\b': 'Caucasian',
+    r'\bColletble\b': 'Collectible',
+    r'\bbibikabat\b': 'Bibikabad',
+    r'""': '"',  # Strip accidental double escaped quote marks in titles
+}
+
+# Country mapping table for post-processing safety
+COUNTRY_MAP = {
+    "persia": "Iran",
+    "persian": "Iran",
+    "caucasian": "Azerbaijan",
+    "caucasus": "Azerbaijan",
+    "afghan": "Afghanistan",
+    "turkish": "Turkey",
+    "anatolian": "Turkey",
+    "chinese": "China",
+    "indian": "India",
+    "moroccan": "Morocco"
 }
 
 for idx, record in enumerate(rug_records, 1):
     rec_id = record.get("id", idx)
     raw_name = record.get("name", "")
     
-    # Pre-clean typos in title string
     cleaned_name = raw_name
     for typo_pattern, replacement in TYPO_FIXES.items():
         cleaned_name = re.sub(typo_pattern, replacement, cleaned_name, flags=re.IGNORECASE)
 
-    parsed = record.get("parsed_data", {})
-
-    # Check if key attributes are missing and need LLM evaluation
-    needs_fallback = (
-        parsed.get("width_ft") is None or 
-        parsed.get("regional_style") is None or
-        "weave_type" not in parsed or
-        "year_produced" not in parsed
-    )
-
-    if needs_fallback:
-        print(f"[{idx}/{total_records}] 🧠 [Ollama Fallback] Processing Record ID {rec_id}...")
+    # Always process through LLM if parsed_data is empty or missing vital metadata
+    print(f"[{idx}/{total_records}] 🧠 [Ollama Processing] Record ID {rec_id}...")
+    
+    try:
+        response = ollama.chat(
+            model="llama3.2",
+            format="json",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f'Extract attributes from: "{cleaned_name}"'}
+            ]
+        )
         
-        try:
-            response = ollama.chat(
-                model="llama3.2",
-                format="json",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": f'Extract attributes from: "{cleaned_name}"'}
-                ]
-            )
-            
-            llm_results = json.loads(response["message"]["content"])
+        llm_results = json.loads(response["message"]["content"])
+        extracted = llm_results.get("parsed_data", llm_results)
 
-            # Standardize & map attributes
-            parsed["width_ft"] = parsed.get("width_ft") or llm_results.get("width_ft")
-            parsed["length_ft"] = parsed.get("length_ft") or llm_results.get("length_ft")
-            parsed["regional_style"] = llm_results.get("regional_style") or parsed.get("regional_style")
-            parsed["country_of_origin"] = llm_results.get("country_of_origin") or parsed.get("country_of_origin")
-            
-            # New fields
-            parsed["weave_type"] = llm_results.get("weave_type")
-            parsed["materials"] = llm_results.get("materials")
-            parsed["year_produced"] = llm_results.get("year_produced")
-            parsed["primary_color"] = llm_results.get("primary_color")
-            
-            parsed["extraction_confidence"] = 90.0
+        # Enforce country name normalization programmatically as a safeguard
+        raw_country = extracted.get("country_of_origin")
+        if raw_country and raw_country.lower() in COUNTRY_MAP:
+            raw_country = COUNTRY_MAP[raw_country.lower()]
 
-        except Exception as e:
-            print(f"  ❌ Error on ID {rec_id}: {e}")
-    else:
-        print(f"[{idx}/{total_records}] ⚡ [Regex Passed] Record ID {rec_id}")
+        parsed = {
+            "is_sold": extracted.get("is_sold", "(SOLD)" in cleaned_name.upper()),
+            "width_ft": extracted.get("width_ft"),
+            "length_ft": extracted.get("length_ft"),
+            "regional_style": extracted.get("regional_style"),
+            "country_of_origin": raw_country,
+            "weave_type": extracted.get("weave_type"),
+            "materials": extracted.get("materials"),
+            "year_produced": extracted.get("year_produced"),
+            "primary_color": extracted.get("primary_color"),
+            "city": extracted.get("city"),
+            "design": extracted.get("design")
+        }
 
+    except Exception as e:
+        print(f"  ❌ Error on ID {rec_id}: {e}")
+        parsed = record.get("parsed_data", {})
+
+    record["name"] = cleaned_name
     record["parsed_data"] = parsed
 
 # Save complete results

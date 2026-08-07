@@ -31,8 +31,8 @@ CITY_MAPPINGS = {
     "khorasan": {"city": "Khorasan", "country": "Iran"},
 
     # Turkey / Anatolia
-    "oushak": {"city": "Usak", "country": "Turkey"},
-    "ushak": {"city": "Usak", "country": "Turkey"},
+    "oushak": {"city": "Uşak", "country": "Turkey"},
+    "ushak": {"city": "Uşak", "country": "Turkey"},
     "hereke": {"city": "Hereke", "country": "Turkey"},
     "konya": {"city": "Konya", "country": "Turkey"},
     "bergama": {"city": "Bergama", "country": "Turkey"},
@@ -86,7 +86,7 @@ def extract_city_from_text(item):
 
 # --- MAIN EXECUTION ---
 input_filename = 'generated_data/rugs_with_image_analysis.json'
-output_filename = 'generated_data/rugs_with_image_analysis.json'
+output_filename = 'rug-map/static/rugs_with_image_analysis.json'
 
 print(f"Loading dataset from {input_filename}...")
 with open(input_filename, 'r', encoding='utf-8') as f:

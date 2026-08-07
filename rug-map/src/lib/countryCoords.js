@@ -17,8 +17,8 @@ export const COUNTRY_COORDS = {
   'Anatolia': { lat: 39.0000, lng: 35.0000 },
 
   // Caucasus Region / Armenia
-  'Caucasian': { lat: 42.0000, lng: 45.0000 },
-  'Caucasus': { lat: 42.0000, lng: 45.0000 },
+//   'Caucasian': { lat: 42.0000, lng: 45.0000 },
+//   'Caucasus': { lat: 42.0000, lng: 45.0000 },
   'Armenian': { lat: 40.0691, lng: 45.0382 },
 
   // India
@@ -27,11 +27,11 @@ export const COUNTRY_COORDS = {
 
   // Turkmenistan / Turkman / Bokhara
 //   'Turkmenistan': { lat: 38.9697, lng: 59.5563 },
-  'Turkman': { lat: 38.9697, lng: 59.5563 },
-  'Bokhara': { lat: 39.7747, lng: 64.4286 },
+//   'Turkman': { lat: 38.9697, lng: 59.5563 },
+//   'Bokhara': { lat: 39.7747, lng: 64.4286 },
 
   // Kazakhstan / Kazakh
-  'Kazakh': { lat: 48.0196, lng: 66.9237 },
+//   'Kazakhstan': { lat: 48.0196, lng: 66.9237 },
 
   // Morocco
   'Moroccan': { lat: 31.7917, lng: -7.0926 },
@@ -47,5 +47,8 @@ export const COUNTRY_COORDS = {
 
   // Central & Middle East
   'Uzbekistan': { lat: 41.3775, lng: 64.5853 },
-  'Iraqi': { lat: 33.2232, lng: 43.6793 }
+  'Iraqi': { lat: 33.2232, lng: 43.6793 },
+
+
+  'United States': { lat: 37.0902, lng: -95.7129 }
 };
