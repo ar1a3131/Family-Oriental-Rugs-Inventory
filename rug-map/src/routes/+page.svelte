@@ -235,6 +235,17 @@
           <span class="external-arrow">↗</span>
         </a>
 
+        <a 
+          href="https://baseerorientalrugs.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="store-link-btn"
+          title="Visit Baseer Oriental Rugs Store"
+        >
+          <span>🌐 Baseer Oriental Rugs</span>
+          <span class="external-arrow">↗</span>
+        </a>
+
         <!-- Quick Feature Navigation -->
               <ViewNav />
 
