@@ -219,7 +219,52 @@
 <div class="layout">
   <aside class="sidebar">
     <header class="sidebar-header">
-      <h2>Rug Collection Exploration</h2>
+      <h2>Family Rug Inventory - Data Exploration</h2>
+      
+      <div class="header-action-bar">
+        <!-- Main Website Link -->
+        <a 
+          href="https://baseerorientalrugs.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="store-link-btn"
+          title="Visit Baseer Oriental Rugs Store"
+        >
+          <span>🌐 Baseer Oriental Rugs</span>
+          <span class="external-arrow">↗</span>
+        </a>
+
+        <!-- Quick Feature Navigation -->
+        <div class="nav-circle-group">
+          <a 
+            href="/" 
+            class="nav-circle-btn" 
+            title="Interactive Map View"
+            aria-label="Map View"
+          >
+            🗺️
+          </a>
+
+          <a 
+            href="/colors" 
+            class="nav-circle-btn" 
+            title="Search by Palette & Color Combos"
+            aria-label="Search by Colors"
+          >
+            🎨
+          </a>
+
+          <a 
+            href="/styles" 
+            class="nav-circle-btn" 
+            title="Search by Style (Kilim, Runner, Art Deco, Kazak, etc.)"
+            aria-label="Search by Style"
+          >
+            🏷️
+          </a>
+        </div>
+      </div>
+
       <p class="subtitle">Total Rugs: <strong>{rugData.length}</strong></p>
     </header>
 
@@ -292,6 +337,115 @@
   :global(body) { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
   .layout { display: flex; height: 100vh; }
   
+
+.header-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.6rem 0 0.8rem 0;
+  flex-wrap: wrap;
+}
+
+/* Store Button */
+.store-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.store-link-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0284c7;
+  transform: translateY(-1px);
+}
+
+.external-arrow {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* Circular Navigation Group */
+.nav-circle-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-circle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  font-size: 0.85rem;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.nav-circle-btn:hover {
+  background: #f8fafc;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-circle-btn:active {
+  transform: translateY(0);
+}
+
+
+  .store-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0.75rem 0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  width: fit-content;
+}
+
+.store-link-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0284c7; /* Highlight color on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.external-arrow {
+  font-size: 0.85rem;
+  color: #64748b;
+  transition: transform 0.15s ease;
+}
+
+.store-link-btn:hover .external-arrow {
+  transform: translate(1px, -1px);
+  color: #0284c7;
+}
+
   .sidebar { 
     width: 400px; 
     padding: 1.25rem; 

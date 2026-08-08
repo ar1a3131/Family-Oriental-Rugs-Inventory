@@ -19,12 +19,12 @@
 
 <article class="rug-card">
   <!-- Image Container with Fallback Handling -->
-   <!-- <a 
+   <a 
       href={rug.product_url} 
       target="_blank" 
       rel="noopener noreferrer" 
       class="rug-card"
-    > -->
+    >
     <div class="image-wrapper">
       {#if imageUrl && !imageError}
         <img 
@@ -80,7 +80,7 @@
       {/if}
     </div>
     
-  <!-- </a> -->
+  </a>
 </article>
 
 <style>

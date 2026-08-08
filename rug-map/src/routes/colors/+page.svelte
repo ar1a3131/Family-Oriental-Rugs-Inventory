@@ -1,37 +1,62 @@
+<!-- src/routes/colors/+page.svelte -->
 <script>
-  import { onMount } from 'svelte';
+  import { COLOR_CONFIG, getRugNormalizedColors } from '$lib/colorMap.js';
 
-  let rugData = [];
-  let colorGroups = {};
-  let selectedColor = 'all';
-  let activeRugs = [];
+  let rugData = $state([]);
+  let selectedColors = $state([]); // Stores array of active color keys
+  let matchMode = $state('all');   // 'all' for strict AND logic
 
-  onMount(async () => {
-    const res = await fetch('/rugs_with_image_analysis.json');
-    rugData = await res.json();
-
-    // Group rugs by extracted colors
-    const groups = {};
-    rugData.forEach(rug => {
-      const colors = rug.parsed_data?.colors || ['Uncategorized'];
-      colors.forEach(color => {
-        const normalized = color.toLowerCase().trim();
-        groups[normalized] = groups[normalized] || [];
-        groups[normalized].push(rug);
-      });
-    });
-
-    colorGroups = groups;
-    activeRugs = rugData;
+  // Load JSON Data
+  $effect(() => {
+    async function loadData() {
+      const res = await fetch('/rugs_with_image_analysis.json');
+      rugData = await res.json();
+    }
+    loadData();
   });
 
-  function filterByColor(color) {
-    selectedColor = color;
-    if (color === 'all') {
-      activeRugs = rugData;
+  // Calculate rug counts per color key
+  let colorCounts = $derived.by(() => {
+    const counts = {};
+    Object.keys(COLOR_CONFIG).forEach(key => (counts[key] = 0));
+
+    rugData.forEach(rug => {
+      const rugColors = getRugNormalizedColors(rug);
+      rugColors.forEach(cKey => {
+        counts[cKey] = (counts[cKey] || 0) + 1;
+      });
+    });
+    return counts;
+  });
+
+  // Filter active rugs based on selection
+  let activeRugs = $derived.by(() => {
+    if (selectedColors.length === 0) return rugData;
+
+    return rugData.filter(rug => {
+      const rugColors = getRugNormalizedColors(rug);
+      
+      if (matchMode === 'all') {
+        // Must contain ALL selected colors
+        return selectedColors.every(c => rugColors.includes(c));
+      } else {
+        // Must contain AT LEAST ONE selected color
+        return selectedColors.some(c => rugColors.includes(c));
+      }
+    });
+  });
+
+  // 👇 THIS IS THE FIX 👇
+  function toggleColor(colorKey) {
+    if (selectedColors.includes(colorKey)) {
+      selectedColors = selectedColors.filter(c => c !== colorKey);
     } else {
-      activeRugs = colorGroups[color] || [];
+      selectedColors = [...selectedColors, colorKey];
     }
+  }
+
+  function clearAll() {
+    selectedColors = [];
   }
 </script>
 
@@ -42,33 +67,62 @@
 <div class="layout">
   <aside class="sidebar">
     <div class="sidebar-header">
-      <h2>Rug Collection Exploration</h2>
+      <h2>Family Rug Inventory</h2>
       <p class="subtitle">Total Rugs: <strong>{rugData.length}</strong></p>
     </div>
 
-    <!-- Navigation Bar for Switching Views -->
+    <!-- View Navigation -->
     <nav class="view-nav">
       <a href="/" class="nav-btn">🗺️ Map View</a>
       <a href="/colors" class="nav-btn active">🎨 View by Color</a>
     </nav>
 
-    <h3>Filter Palette</h3>
-    <div class="color-palette">
-      <button 
-        class="color-pill {selectedColor === 'all' ? 'active' : ''}" 
-        on:click={() => filterByColor('all')}
-      >
-        All Colors ({rugData.length})
-      </button>
+    <!-- Filter Header & Controls -->
+    <div class="filter-header">
+      <h3>Filter Palette</h3>
+      {#if selectedColors.length > 0}
+        <button class="clear-btn" onclick={clearAll}>Clear ({selectedColors.length})</button>
+      {/if}
+    </div>
 
-      {#each Object.entries(colorGroups) as [color, rugs]}
+    <!-- Match Mode Switch (Only visible when >1 colors selected) -->
+    {#if selectedColors.length > 1}
+      <div class="match-toggle">
+        <span class="mode-label">Filter Logic:</span>
         <button 
-          class="color-pill {selectedColor === color ? 'active' : ''}" 
-          on:click={() => filterByColor(color)}
+          class="mode-btn" 
+          class:active={matchMode === 'any'} 
+          onclick={() => (matchMode = 'any')}
         >
-          <span class="color-dot" style="background-color: {color};"></span>
-          <span class="color-name">{color}</span>
-          <span class="count">({rugs.length})</span>
+          Match ANY
+        </button>
+        <button 
+          class="mode-btn" 
+          class:active={matchMode === 'all'} 
+          onclick={() => (matchMode = 'all')}
+        >
+          Match ALL
+        </button>
+      </div>
+    {/if}
+
+    <!-- Color Palette List -->
+    <div class="color-palette">
+      {#each Object.entries(COLOR_CONFIG) as [key, config]}
+        {@const count = colorCounts[key] || 0}
+        <button 
+          class="color-pill"
+          class:active={selectedColors.includes(key)}
+          class:disabled={count === 0}
+          disabled={count === 0}
+          onclick={() => toggleColor(key)}
+        >
+          <span class="checkbox">
+            {selectedColors.includes(key) ? '✓' : ''}
+          </span>
+          <span class="color-dot" style="background-color: {config.hex};"></span>
+          <span class="color-name">{config.label}</span>
+          <span class="count">({count})</span>
         </button>
       {/each}
     </div>
@@ -76,27 +130,50 @@
 
   <main class="gallery-container">
     <header class="gallery-header">
-      <h2>Displaying {selectedColor.toUpperCase()} Rugs ({activeRugs.length})</h2>
+      <div>
+        <h2>Displaying {activeRugs.length} Rugs</h2>
+        {#if selectedColors.length > 0}
+          <div class="active-chips">
+            <span class="chip-label">Must contain ALL of:</span>
+            {#each selectedColors as key}
+              <span class="active-chip" style="border-left: 4px solid {COLOR_CONFIG[key]?.hex}">
+                {COLOR_CONFIG[key]?.label || key}
+                <button onclick={() => toggleColor(key)}>✕</button>
+              </span>
+            {/each}
+            <button class="clear-all-link" onclick={clearAll}>Clear Filters</button>
+          </div>
+        {:else}
+          <p class="hint">Showing all rugs. Select multiple colors to find rugs containing all selected tones.</p>
+        {/if}
+      </div>
     </header>
 
     <div class="rug-grid">
-      {#each activeRugs as rug}
+      {#each activeRugs as rug (rug.id || rug.name)}
         <div class="rug-card">
           <div class="img-wrapper">
             {#if rug.image_url}
               <img src={rug.image_url} alt={rug.name} loading="lazy" />
+            {:else}
+              <div class="no-img">No Image Available</div>
             {/if}
           </div>
           <div class="card-info">
             <h4>{rug.name || 'Rug Item'}</h4>
             <span class="city-tag">{rug.parsed_data?.city || 'Unknown Origin'}</span>
-            {#if rug.parsed_data?.colors?.length}
-              <div class="colors-list">
-                {#each rug.parsed_data.colors as c}
-                  <span class="chip">{c}</span>
-                {/each}
-              </div>
-            {/if}
+            
+            <div class="colors-list">
+              {#each getRugNormalizedColors(rug) as cKey}
+                <span 
+                  class="chip"
+                  class:highlight={selectedColors.includes(cKey)}
+                >
+                  <span class="chip-dot" style="background-color: {COLOR_CONFIG[cKey]?.hex};"></span>
+                  {COLOR_CONFIG[cKey]?.label || cKey}
+                </span>
+              {/each}
+            </div>
           </div>
         </div>
       {/each}
@@ -107,35 +184,64 @@
 <style>
   :global(body) { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; }
   .layout { display: flex; height: 100vh; }
-  .sidebar { width: 340px; padding: 1.5rem; overflow-y: auto; border-right: 1px solid #e2e8f0; background: #ffffff; flex-shrink: 0; }
+  .sidebar { width: 340px; padding: 1.5rem; overflow-y: auto; border-right: 1px solid #e2e8f0; background: #ffffff; flex-shrink: 0; display: flex; flex-direction: column; }
   
-  .sidebar-header h2 { margin: 0; font-size: 1.25rem; color: #0f172a; }
+  .sidebar-header h2 { margin: 0; font-size: 1.2rem; color: #0f172a; }
   .subtitle { color: #64748b; font-size: 0.85rem; margin: 0.25rem 0 1rem 0; }
 
   /* Navigation Tabs */
-  .view-nav { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: #f1f5f9; padding: 4px; border-radius: 8px; }
-  .nav-btn { flex: 1; text-align: center; padding: 0.5rem; font-size: 0.85rem; font-weight: 600; text-decoration: none; color: #64748b; border-radius: 6px; }
+  .view-nav { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; background: #f1f5f9; padding: 4px; border-radius: 8px; }
+  .nav-btn { flex: 1; text-align: center; padding: 0.5rem; font-size: 0.8rem; font-weight: 600; text-decoration: none; color: #64748b; border-radius: 6px; }
   .nav-btn.active, .nav-btn:hover { background: #ffffff; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
+  .filter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .filter-header h3 { margin: 0; font-size: 0.95rem; color: #1e293b; }
+  .clear-btn { background: none; border: none; color: #0284c7; font-size: 0.75rem; font-weight: 600; cursor: pointer; padding: 0; }
+  .clear-btn:hover { text-decoration: underline; }
+
+  /* Logic Toggle */
+  .match-toggle { display: flex; align-items: center; gap: 0.3rem; background: #f8fafc; padding: 4px; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 0.75rem; }
+  .mode-label { font-size: 0.7rem; font-weight: 600; color: #64748b; margin-right: auto; padding-left: 4px; }
+  .mode-btn { border: none; background: transparent; font-size: 0.7rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; color: #64748b; cursor: pointer; }
+  .mode-btn.active { background: #0284c7; color: #ffffff; }
+
   /* Color Palette Filter Buttons */
-  .color-palette { display: flex; flex-direction: column; gap: 0.5rem; }
-  .color-pill { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; border: 1px solid #e2e8f0; background: #fff; border-radius: 8px; cursor: pointer; font-size: 0.85rem; text-transform: capitalize; transition: all 0.2s; }
-  .color-pill:hover, .color-pill.active { border-color: #2563eb; background: #eff6ff; }
-  .color-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
-  .color-name { flex: 1; text-align: left; font-weight: 500; }
+  .color-palette { display: flex; flex-direction: column; gap: 0.35rem; }
+  .color-pill { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.65rem; border: 1px solid #e2e8f0; background: #fff; border-radius: 8px; cursor: pointer; font-size: 0.825rem; transition: all 0.15s ease; }
+  .color-pill:hover { border-color: #cbd5e1; background: #f8fafc; }
+  .color-pill.active { border-color: #0284c7; background: #f0f9ff; }
+  .color-pill.disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .checkbox { width: 14px; height: 14px; border: 1px solid #cbd5e1; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: bold; color: #0284c7; background: #fff; }
+  .color-pill.active .checkbox { border-color: #0284c7; background: #e0f2fe; }
+
+  .color-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); flex-shrink: 0; }
+  .color-name { flex: 1; text-align: left; font-weight: 500; color: #334155; }
   .count { color: #94a3b8; font-size: 0.75rem; }
 
   /* Main Gallery View */
   .gallery-container { flex: 1; padding: 2rem; overflow-y: auto; }
-  .gallery-header h2 { margin: 0 0 1.5rem 0; font-size: 1.25rem; color: #1e293b; }
-  
+  .gallery-header h2 { margin: 0 0 0.25rem 0; font-size: 1.25rem; color: #1e293b; }
+  .hint { color: #64748b; font-size: 0.85rem; margin: 0 0 1.5rem 0; }
+
+  .active-chips { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 0.75rem 0 1.5rem 0; }
+  .chip-label { font-size: 0.75rem; color: #64748b; font-weight: 600; }
+  .active-chip { display: inline-flex; align-items: center; gap: 0.4rem; background: #ffffff; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+  .active-chip button { border: none; background: transparent; color: #94a3b8; cursor: pointer; padding: 0; font-size: 0.75rem; }
+  .active-chip button:hover { color: #ef4444; }
+
   .rug-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
-  .rug-card { background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .img-wrapper { height: 180px; background: #f1f5f9; }
+  .rug-card { background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
+  .img-wrapper { height: 180px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; }
   .img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-  .card-info { padding: 0.85rem; }
+  .no-img { font-size: 0.75rem; color: #94a3b8; }
+  
+  .card-info { padding: 0.85rem; display: flex; flex-direction: column; flex: 1; }
   .card-info h4 { margin: 0 0 0.35rem 0; font-size: 0.85rem; color: #0f172a; font-weight: 600; line-height: 1.3; }
-  .city-tag { font-size: 0.75rem; color: #2563eb; font-weight: 500; display: block; margin-bottom: 0.5rem; }
-  .colors-list { display: flex; gap: 0.25rem; flex-wrap: wrap; }
-  .chip { font-size: 0.65rem; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #475569; text-transform: capitalize; }
+  .city-tag { font-size: 0.75rem; color: #0284c7; font-weight: 500; display: block; margin-bottom: 0.5rem; }
+  
+  .colors-list { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: auto; }
+  .chip { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.65rem; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #475569; font-weight: 500; border: 1px solid transparent; }
+  .chip.highlight { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 </style>

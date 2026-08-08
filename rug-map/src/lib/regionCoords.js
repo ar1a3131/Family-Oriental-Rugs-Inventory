@@ -10,7 +10,7 @@ export const REGION_COORDS = {
   // 'Caucasus': { lat: 41.5, lng: 46.5, radius: 220000, color: '#ec4899' },
 //   'Persian': { lat: 32.0, lng: 53.0, radius: 550000, color: '#8b5cf6' },
 //   'Iran': { lat: 32.0, lng: 53.0, radius: 550000, color: '#8b5cf6' },
-  'South Central Asia': { lat: 37.1724, lng: 67.7872, radius: 450000, color: '#10b981' },
+  'Central Asia': { lat: 39.65, lng: 66.96, radius: 550000, color: '#10b981' },
   'Turkman': { lat: 38.9697, lng: 59.5563, radius: 350000, color: '#10b981' },
 //   'Turkmen': { lat: 38.5, lng: 59.0, radius: 350000, color: '#10b981' },
   'Kurdish': { lat: 36.5, lng: 44.0, radius: 250000, color: '#ef4444' },
