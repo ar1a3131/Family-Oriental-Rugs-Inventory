@@ -236,13 +236,13 @@
         </a>
 
         <a 
-          href="https://baseerorientalrugs.com" 
+          href="https://github.com/ar1a3131/Family-Oriental-Rugs-Inventory" 
           target="_blank" 
           rel="noopener noreferrer" 
           class="store-link-btn"
-          title="Visit Baseer Oriental Rugs Store"
+          title="Visit my GitHub repo to look at my messy code for this project!"
         >
-          <span>🌐 Baseer Oriental Rugs</span>
+          <span>👾 GitHub Repo</span>
           <span class="external-arrow">↗</span>
         </a>
 
