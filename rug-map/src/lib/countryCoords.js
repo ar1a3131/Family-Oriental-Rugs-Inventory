@@ -5,7 +5,7 @@ export const COUNTRY_COORDS = {
   'Iran': { lat: 32.4279, lng: 53.6880 },
 
   // Afghanistan
-  'Afghanistan': { lat: 33.9391, lng: 67.7100 },
+  'Afghanistan': { lat: 34.5391, lng: 66.0100 },
 
   // China / Chinese
   'Chinese': { lat: 35.8617, lng: 104.1954 },

@@ -4,6 +4,7 @@
   import { REGION_COORDS } from '$lib/regionCoords.js';
   import { COUNTRY_COORDS } from '$lib/countryCoords.js';
   import RugCard from '$lib/components/RugCard.svelte';
+  import ViewNav from '$lib/ViewNav.svelte';
 
   // 1. Reactive state using Svelte 5 runes
   let rugData = $state([]);
@@ -221,7 +222,7 @@
     <header class="sidebar-header">
       <h2>Family Rug Inventory - Data Exploration</h2>
       
-      <div class="header-action-bar">
+      
         <!-- Main Website Link -->
         <a 
           href="https://baseerorientalrugs.com" 
@@ -235,35 +236,9 @@
         </a>
 
         <!-- Quick Feature Navigation -->
-        <div class="nav-circle-group">
-          <a 
-            href="/" 
-            class="nav-circle-btn" 
-            title="Interactive Map View"
-            aria-label="Map View"
-          >
-            🗺️
-          </a>
+              <ViewNav />
 
-          <a 
-            href="/colors" 
-            class="nav-circle-btn" 
-            title="Search by Palette & Color Combos"
-            aria-label="Search by Colors"
-          >
-            🎨
-          </a>
-
-          <a 
-            href="/styles" 
-            class="nav-circle-btn" 
-            title="Search by Style (Kilim, Runner, Art Deco, Kazak, etc.)"
-            aria-label="Search by Style"
-          >
-            🏷️
-          </a>
-        </div>
-      </div>
+      
 
       <p class="subtitle">Total Rugs: <strong>{rugData.length}</strong></p>
     </header>
@@ -334,8 +309,12 @@
 </div>
 
 <style>
-  :global(body) { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    :global(body) { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; }
   .layout { display: flex; height: 100vh; }
+  .sidebar { width: 340px; padding: 1.5rem; overflow-y: auto; border-right: 1px solid #e2e8f0; background: #ffffff; flex-shrink: 0; display: flex; flex-direction: column; }
+  
+  .sidebar-header h2 { margin: 0; font-size: 1.2rem; color: #0f172a; }
+  .subtitle { color: #64748b; font-size: 0.85rem; margin: 0.25rem 0 1rem 0; }
   
 
 .header-action-bar {
