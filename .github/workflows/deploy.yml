@@ -19,8 +19,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    
-    # Instruct GitHub Actions to run commands inside the rug-map directory
+
     defaults:
       run:
         working-directory: ./rug-map
