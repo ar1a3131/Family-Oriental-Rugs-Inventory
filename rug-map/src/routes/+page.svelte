@@ -2,7 +2,7 @@
 <script>
   import { CITY_COORDS } from '$lib/cityCoords.js';
   import { REGION_COORDS } from '$lib/regionCoords.js';
-  import { COUNTRY_COORDS } from '$lib/countryCoords.js'; // Ensure country coordinates are defined here
+  import { COUNTRY_COORDS } from '$lib/countryCoords.js';
   import RugCard from '$lib/components/RugCard.svelte';
 
   // 1. Reactive state using Svelte 5 runes
@@ -41,15 +41,31 @@
 
       const L = await import('leaflet');
 
-      mapInstance = L.map(mapElement, { zoomControl: false }).setView([34.0, 48.0], 4);
+      // Define standard world bounds [Southwest, Northeast]
+      const worldBounds = L.latLngBounds(
+        L.latLng(-90, -180),
+        L.latLng(90, 180)
+      );
+
+      // Initialize map with globe boundaries
+      mapInstance = L.map(mapElement, { 
+        zoomControl: false,
+        minZoom: 2.5,
+        maxBounds: worldBounds,
+        maxBoundsViscosity: 1.0 // Rigid boundaries (prevents panning into empty gray space)
+      }).setView([34.0, 48.0], 4);
+      
       map = mapInstance;
 
       L.control.zoom({ position: 'topright' }).addTo(mapInstance);
 
+      // CARTO Tile Layer with noWrap enabled
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap &copy; CARTO',
         subdomains: 'abcd',
-        maxZoom: 19
+        maxZoom: 19,
+        noWrap: true,       // Prevents horizontal repeating of tiles
+        bounds: worldBounds // Constrains tile requests to the world area
       }).addTo(mapInstance);
 
       // Categorization Buckets

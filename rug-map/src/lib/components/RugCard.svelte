@@ -19,60 +19,68 @@
 
 <article class="rug-card">
   <!-- Image Container with Fallback Handling -->
-  <div class="image-wrapper">
-    {#if imageUrl && !imageError}
-      <img 
-        src={imageUrl} 
-        alt={title} 
-        loading="lazy" 
-        onerror={() => (imageError = true)} 
-      />
-    {:else}
-      <div class="image-placeholder">
-        <span>📷 Image Unavailable</span>
-      </div>
-    {/if}
-  </div>
-
-  <!-- Detailed Metadata Content -->
-  <div class="card-content">
-    <h4 class="rug-title">{title}</h4>
-
-    <div class="badge-group">
-      {#if city}
-        <span class="badge city-badge">📍 {city}</span>
-      {/if}
-      <span class="badge style-badge">🎨 {style}</span>
-    </div>
-
-    {#if dimensions || material}
-      <dl class="meta-list">
-        {#if dimensions}
-          <div class="meta-item">
-            <dt>Size:</dt>
-            <dd>{dimensions}</dd>
-          </div>
-        {/if}
-        {#if material}
-          <div class="meta-item">
-            <dt>Material:</dt>
-            <dd>{material}</dd>
-          </div>
-        {/if}
-      </dl>
-    {/if}
-
-    {#if colors.length > 0}
-      <div class="color-section">
-        <span class="color-label">Palette:</span>
-        <div class="color-chips">
-          {#each colors.slice(0, 4) as color}
-            <span class="color-chip">{color}</span>
-          {/each}
+   <!-- <a 
+      href={rug.product_url} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="rug-card"
+    > -->
+    <div class="image-wrapper">
+      {#if imageUrl && !imageError}
+        <img 
+          src={imageUrl} 
+          alt={title} 
+          loading="lazy" 
+          onerror={() => (imageError = true)} 
+        />
+      {:else}
+        <div class="image-placeholder">
+          <span>📷 Image Unavailable</span>
         </div>
+      {/if}
+      
+    </div>
+    <!-- Detailed Metadata Content -->
+    <div class="card-content">
+      <h4 class="rug-title">{title}</h4>
+
+      <div class="badge-group">
+        {#if city}
+          <span class="badge city-badge">📍 {city}</span>
+        {/if}
+        <span class="badge style-badge">🎨 {style}</span>
       </div>
-    {/if}
-  </div>
+
+      {#if dimensions || material}
+        <dl class="meta-list">
+          {#if dimensions}
+            <div class="meta-item">
+              <dt>Size:</dt>
+              <dd>{dimensions}</dd>
+            </div>
+          {/if}
+          {#if material}
+            <div class="meta-item">
+              <dt>Material:</dt>
+              <dd>{material}</dd>
+            </div>
+          {/if}
+        </dl>
+      {/if}
+
+      {#if colors.length > 0}
+        <div class="color-section">
+          <span class="color-label">Palette:</span>
+          <div class="color-chips">
+            {#each colors.slice(0, 4) as color}
+              <span class="color-chip">{color}</span>
+            {/each}
+          </div>
+        </div>
+      {/if}
+    </div>
+    
+  <!-- </a> -->
 </article>
 
 <style>
@@ -81,6 +89,8 @@
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     overflow: hidden;
+    text-decoration: none; /* Prevents default blue underline on text */
+    color: inherit;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
@@ -88,8 +98,8 @@
   }
 
   .rug-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   }
 
   .image-wrapper {

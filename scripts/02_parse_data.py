@@ -25,10 +25,11 @@ You are an expert data extraction assistant specializing in e-commerce catalog p
    - Set to `true` if the title/name explicitly contains "(SOLD)", "(sold)", "sold", or similar status indicators. Otherwise, set to `false`.
 
 2. width_ft (string or null): 
-   - Extract the rug width in feet and inches format as stated (e.g., "8'", "8ft", "5'10\"", "3ft"). Do not output decimal floats. If not mentioned, return null.
+   - Extract the rug width in feet and inches format as stated (e.g., "8'", "8ft", "5'10\"", "3ft", "5ft7\""). Do not output decimal floats. If not mentioned, return null.
+   - the width_ft will most likely be the first set of "8'", "8ft", "5'10\"", "3ft", "5ft7\"" before a "by", " by ", " x " or "x"... after the "by", " by ", " x " or "x", will be the length will follow after the "by", " by ", " x " or "x" and be in a similar format to "8'", "8ft", "5'10\"", "3ft", "5ft7\""
 
 3. length_ft (string or null): 
-   - Extract the rug length in feet and inches format as stated (e.g., "10'", "11'4\"", "7'8\"", "15ft 5\""). Do not output decimal floats. If not mentioned, return null.
+   - Extract the rug length in feet and inches format as stated (e.g., "10'", "11'4\"", "7'8\"", "15ft 5\"" after the "by", " by ", " x " or "x"). Do not output decimal floats. If not mentioned, return null.
 
 4. regional_style (string or null): 
    - Extract the specific design/style name (e.g., "Heriz", "Shirvan", "Serapi", "Oushak", "Caucasian", "Tabriz", "Sarouk", "Art Deco", "Herati", "European", "Bibikabad", "Kermanshah"). Capitalize properly. If not mentioned, return null.

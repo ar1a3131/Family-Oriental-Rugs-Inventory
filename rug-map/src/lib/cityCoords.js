@@ -16,6 +16,12 @@ export const CITY_COORDS = {
   "Malayer": { lat: 35.3000, lng: 50.1000, country: "Iran" },
   "Maimana": { lat: 35.9200, lng: 64.7700, country: "Afghanistan" },
   "Karaj": { lat: 35.8327, lng: 50.9916, country: "Iran" },
-  "Hotan": { lat: 37.1000, lng: 79.9333, country: "China" },
-  "Qom": { lat: 34.6400, lng: 50.8700, country: "Iran" }
+  "Hotan (East Turkestan)": { lat: 37.1000, lng: 79.9333, country: "China" },
+  "Qom": { lat: 34.6400, lng: 50.8700, country: "Iran" },
+  'Mashhad': { lat: 36.3107, lng: 59.5995, country: "Iran" },
+  'Hamadan': {lat: 34.7983, lng: 48.5147, country: "Iran"},
+  'Aubusson': {lat: 45.9569, lng: 2.1683, country: "France"},
+  'Lilihan': {lat: 33.68444, lng: 49.94083, country: "Iran"},
+  'Hereke': {lat: 40.788, lng: 29.616, country: "Turkey"},
+  'Lahore': {lat: 31.54972, lng: 74.34361, country: "Pakistan"}
 };

@@ -185,7 +185,7 @@
       "is_sold": true,
       "width_ft": "3ft",
       "length_ft": "5'3\"",
-      "regional_style": "Persian",
+      "regional_style": "Baloch",
       "country_of_origin": "Iran",
       "weave_type": "Hand-Woven",
       "materials": [
@@ -3712,7 +3712,7 @@
       "is_sold": false,
       "width_ft": "2'1\"",
       "length_ft": "4'1\"",
-      "regional_style": "Turkmen",
+      "regional_style": "Gabbeh",
       "country_of_origin": "Iran",
       "weave_type": "Hand-Knotted",
       "materials": [
@@ -4974,7 +4974,7 @@
       "is_sold": true,
       "width_ft": "7ft",
       "length_ft": "7ft",
-      "regional_style": "Persian",
+      "regional_style": "Khottan",
       "country_of_origin": null,
       "weave_type": "Hand-Knotted",
       "materials": [
@@ -4982,7 +4982,7 @@
       ],
       "year_produced": "1900s",
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Hotan (East Turkestan)",
       "design": null,
       "colors": [
         "Creamy Beige",
@@ -5212,10 +5212,10 @@
     "source_page": 11,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
+      "width_ft": "2'",
+      "length_ft": "4'",
       "regional_style": "Floral",
-      "country_of_origin": null,
+      "country_of_origin": "China",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -5389,7 +5389,7 @@
       "width_ft": null,
       "length_ft": "10'",
       "regional_style": "Mamluk",
-      "country_of_origin": null,
+      "country_of_origin": "Afghanistan",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -5508,8 +5508,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": null,
-      "country_of_origin": null,
+      "regional_style": "Sarouk",
+      "country_of_origin": "Iran",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -6306,8 +6306,8 @@
       "is_sold": false,
       "width_ft": "4'9\"",
       "length_ft": "6'5\"",
-      "regional_style": null,
-      "country_of_origin": "Kazakhstan",
+      "regional_style": "Caucasus",
+      "country_of_origin": null,
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -6330,7 +6330,7 @@
       "is_sold": true,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Heriz",
+      "regional_style": "Art Deco",
       "country_of_origin": null,
       "weave_type": "Hand-Knotted",
       "materials": [
@@ -6356,7 +6356,7 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": "8'8\"",
-      "regional_style": null,
+      "regional_style": "Caucasus",
       "country_of_origin": null,
       "weave_type": null,
       "materials": [
@@ -6451,13 +6451,13 @@
     "source_page": 14,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
+      "width_ft": "1'8\"",
+      "length_ft": "1'",
       "regional_style": null,
-      "country_of_origin": null,
-      "weave_type": null,
+      "country_of_origin": "China",
+      "weave_type": "Hand-Knotted",
       "materials": null,
-      "year_produced": null,
+      "year_produced": "Vintage",
       "primary_color": null,
       "city": "Unknown",
       "design": null
@@ -6650,7 +6650,7 @@
       "year_produced": "new",
       "primary_color": null,
       "city": "Unknown",
-      "design": null
+      "design": "Mamluk"
     }
   },
   {
@@ -6665,7 +6665,7 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": null,
+      "regional_style": "South Central Asia",
       "country_of_origin": null,
       "weave_type": null,
       "materials": [
@@ -6674,7 +6674,7 @@
       "year_produced": "Vintage",
       "primary_color": null,
       "city": "Unknown",
-      "design": null
+      "design": "Suzani"
     }
   },
   {
@@ -6739,7 +6739,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "China",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -6761,7 +6761,7 @@
       "width_ft": "8'2\"",
       "length_ft": "11'",
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "China",
       "weave_type": null,
       "materials": [
         "Wool"
@@ -6785,7 +6785,7 @@
       "width_ft": null,
       "length_ft": "7'5\"",
       "regional_style": "Tribal",
-      "country_of_origin": null,
+      "country_of_origin": "Turkey",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -6809,7 +6809,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "Turkey",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -6879,7 +6879,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Afghan Kazakh",
-      "country_of_origin": "Azerbaijan",
+      "country_of_origin": "Afghanistan",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -7366,8 +7366,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Afghan",
-      "country_of_origin": null,
+      "regional_style": "Turkman",
+      "country_of_origin": "Afghanistan",
       "weave_type": "Hand-Woven",
       "materials": [
         "Wool"
@@ -7464,7 +7464,7 @@
       "width_ft": "8ft",
       "length_ft": null,
       "regional_style": "Bessarabian",
-      "country_of_origin": "Romania",
+      "country_of_origin": null,
       "weave_type": "Handwoven",
       "materials": [
         "Wool"
@@ -7547,7 +7547,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "Nepal",
       "weave_type": "Hand-Knotted",
       "materials": [
         "100% Wool"
@@ -7614,16 +7614,18 @@
     "source_page": 17,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
+      "width_ft": "3'5\"",
+      "length_ft": "6'",
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "Iran",
       "weave_type": null,
-      "materials": null,
-      "year_produced": null,
+      "materials": [
+        "Camel hair"
+      ],
+      "year_produced": "1900s",
       "primary_color": null,
       "city": "Unknown",
-      "design": null
+      "design": "Boteh"
     }
   },
   {
@@ -7686,7 +7688,7 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Baluchi",
+      "regional_style": "Baloch",
       "country_of_origin": "Afghanistan",
       "weave_type": "Hand-Woven",
       "materials": [
@@ -7794,8 +7796,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": null,
-      "country_of_origin": null,
+      "regional_style": "Art Deco",
+      "country_of_origin": "China",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -7816,15 +7818,15 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": "7'6\"",
-      "regional_style": "Afghan",
-      "country_of_origin": "Azerbaijan",
+      "regional_style": "Maimana",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [
         "Wool"
       ],
       "year_produced": "1950s",
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Maimana",
       "design": null
     }
   },
@@ -7862,11 +7864,11 @@
     "source_page": 18,
     "parsed_data": {
       "is_sold": true,
-      "width_ft": null,
-      "length_ft": null,
+      "width_ft": "6'",
+      "length_ft": "9'",
       "regional_style": null,
-      "country_of_origin": null,
-      "weave_type": null,
+      "country_of_origin": "Afghanistan",
+      "weave_type": "Hand-Knotted",
       "materials": [
         "100% pure wool",
         "hand knotted"
@@ -8158,10 +8160,10 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "Iran",
       "weave_type": null,
       "materials": null,
-      "year_produced": null,
+      "year_produced": "1920s",
       "primary_color": null,
       "city": "Unknown",
       "design": null
@@ -8203,13 +8205,10 @@
       "is_sold": false,
       "width_ft": "8ft",
       "length_ft": null,
-      "regional_style": null,
-      "country_of_origin": null,
+      "regional_style": "Art Deco",
+      "country_of_origin": "China",
       "weave_type": "Hand-Woven",
-      "materials": [
-        "Silk",
-        "Wool"
-      ],
+      "materials": null,
       "year_produced": "1920s",
       "primary_color": null,
       "city": "Unknown",
@@ -8263,9 +8262,11 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Heriz",
-      "country_of_origin": null,
+      "country_of_origin": "Japan",
       "weave_type": null,
-      "materials": null,
+      "materials": [
+        "Wool"
+      ],
       "year_produced": null,
       "primary_color": null,
       "city": "Unknown",
@@ -8317,10 +8318,10 @@
     "source_page": 19,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
+      "width_ft": "1'6\"",
+      "length_ft": "8'11\"",
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "Iran",
       "weave_type": null,
       "materials": [],
       "year_produced": "circa 1880s",
@@ -8738,13 +8739,13 @@
     "source_page": 20,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
-      "regional_style": "Tribal",
-      "country_of_origin": null,
+      "width_ft": "3'6\"",
+      "length_ft": "5'3\"",
+      "regional_style": "Kazak",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": null,
-      "year_produced": null,
+      "year_produced": "New",
       "primary_color": null,
       "city": "Unknown",
       "design": null,
@@ -8805,7 +8806,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Tribal",
-      "country_of_origin": null,
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -9033,7 +9034,7 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": "7'8\"",
-      "regional_style": null,
+      "regional_style": "Caucasus",
       "country_of_origin": null,
       "weave_type": null,
       "materials": [
@@ -9153,10 +9154,10 @@
     "source_page": 21,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": "8ft",
-      "length_ft": null,
-      "regional_style": null,
-      "country_of_origin": "Azerbaijan",
+      "width_ft": "4'10\"",
+      "length_ft": "5'5\"",
+      "regional_style": "Caucasus",
+      "country_of_origin": null,
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -9283,8 +9284,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Floral",
-      "country_of_origin": null,
+      "regional_style": "Art Deco",
+      "country_of_origin": "China",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool",
@@ -9545,7 +9546,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": null,
-      "country_of_origin": null,
+      "country_of_origin": "China",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -9566,8 +9567,8 @@
       "is_sold": true,
       "width_ft": "3'8\"",
       "length_ft": "4'11\"",
-      "regional_style": null,
-      "country_of_origin": "Kazakhstan",
+      "regional_style": "Kazak",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [
         "Wool"
@@ -9963,8 +9964,8 @@
       "is_sold": true,
       "width_ft": "9ft",
       "length_ft": "16'2\"",
-      "regional_style": "Afghan",
-      "country_of_origin": "Azerbaijan",
+      "regional_style": "Chobi",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [
         "Wool",
@@ -10554,13 +10555,13 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": null,
-      "country_of_origin": null,
+      "regional_style": "Abussan",
+      "country_of_origin": "France",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Aubusson",
       "design": null
     }
   },
@@ -10886,7 +10887,7 @@
       "width_ft": "8ft",
       "length_ft": "2'7\"",
       "regional_style": "Afghan",
-      "country_of_origin": null,
+      "country_of_origin": "Afghanistan",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -11121,10 +11122,10 @@
     "source_page": 26,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": "10ft x12ft",
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "width_ft": "10'",
+      "length_ft": "12'",
+      "regional_style": "Bakhtiari",
+      "country_of_origin": "Iran",
       "weave_type": "Hand-Woven",
       "materials": [
         "Wool"
@@ -11260,8 +11261,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Gabeh",
-      "country_of_origin": null,
+      "regional_style": "Gabbeh",
+      "country_of_origin": "Iran",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -11469,7 +11470,7 @@
       "is_sold": true,
       "width_ft": "3'5\"",
       "length_ft": null,
-      "regional_style": "Tribal/Geometric",
+      "regional_style": "Caucasus",
       "country_of_origin": null,
       "weave_type": "Hand-Woven",
       "materials": [
@@ -11753,7 +11754,7 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Persian",
+      "regional_style": "European",
       "country_of_origin": null,
       "weave_type": null,
       "materials": [
@@ -12701,8 +12702,8 @@
       "is_sold": true,
       "width_ft": "8ft",
       "length_ft": null,
-      "regional_style": "Caucasian kazakh",
-      "country_of_origin": "Azerbaijan",
+      "regional_style": "Caucasian",
+      "country_of_origin": null,
       "weave_type": null,
       "materials": [
         "Handwoven",
@@ -13284,7 +13285,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Moroccan",
-      "country_of_origin": null,
+      "country_of_origin": "Morocco",
       "weave_type": "Hand-Woven",
       "materials": [
         "Wool"
@@ -13481,8 +13482,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Tribal",
-      "country_of_origin": null,
+      "regional_style": "Turkman",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -13652,7 +13653,7 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Savonnery",
+      "regional_style": "European",
       "country_of_origin": null,
       "weave_type": "Handwoven",
       "materials": [
@@ -13856,7 +13857,7 @@
       "is_sold": true,
       "width_ft": null,
       "length_ft": "11'7\"",
-      "regional_style": "Bakhtiary",
+      "regional_style": "Bakhtiari",
       "country_of_origin": null,
       "weave_type": "Hand-Knotted",
       "materials": [
@@ -14139,7 +14140,7 @@
       "is_sold": false,
       "width_ft": "5ft",
       "length_ft": "8ft",
-      "regional_style": "Persian",
+      "regional_style": "Baloch",
       "country_of_origin": null,
       "weave_type": null,
       "materials": [
@@ -14645,11 +14646,11 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "regional_style": "Mahal",
+      "country_of_origin": "Iran",
       "weave_type": null,
       "materials": null,
-      "year_produced": null,
+      "year_produced": "1920s",
       "primary_color": null,
       "city": "Unknown",
       "design": null,
@@ -14748,7 +14749,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Karistan",
-      "country_of_origin": "American (machine-made)",
+      "country_of_origin": "United States",
       "weave_type": null,
       "materials": [],
       "year_produced": "Vintage",
@@ -14880,10 +14881,10 @@
     "source_page": 34,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
-      "regional_style": "Heriz",
-      "country_of_origin": null,
+      "width_ft": "2'",
+      "length_ft": "4'",
+      "regional_style": null,
+      "country_of_origin": "China",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -14948,8 +14949,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Tribal",
-      "country_of_origin": null,
+      "regional_style": "Chobi",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [],
       "year_produced": null,
@@ -15510,7 +15511,7 @@
       "is_sold": false,
       "width_ft": "14'8\"",
       "length_ft": "11'8\"",
-      "regional_style": "Persian",
+      "regional_style": null,
       "country_of_origin": null,
       "weave_type": null,
       "materials": [
@@ -15676,8 +15677,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "regional_style": "Bessarabian",
+      "country_of_origin": "Turkey",
       "weave_type": null,
       "materials": [
         "Wool"
@@ -16237,8 +16238,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": "11'8\"",
-      "regional_style": "Kazak",
-      "country_of_origin": "Azerbaijan",
+      "regional_style": "Caucasus",
+      "country_of_origin": null,
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
@@ -16709,13 +16710,13 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Kazak",
-      "country_of_origin": null,
+      "regional_style": "Art Deco",
+      "country_of_origin": "China",
       "weave_type": "Hand-Woven",
       "materials": [
         "Silk"
       ],
-      "year_produced": "circa 1950",
+      "year_produced": "1950s",
       "primary_color": null,
       "city": "Unknown",
       "design": null,
@@ -17055,7 +17056,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Tribal",
-      "country_of_origin": null,
+      "country_of_origin": "Morocco",
       "weave_type": null,
       "materials": [
         "100% Pure Wool"
@@ -17088,14 +17089,14 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Serapi",
-      "country_of_origin": "Azerbaijan",
+      "country_of_origin": "Iran",
       "weave_type": "Hand-Knotted",
       "materials": [
         "Wool"
       ],
       "year_produced": "Vintage",
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Heriz",
       "design": "Geometric",
       "colors": [
         "Rust Red",
@@ -17220,14 +17221,14 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Abussan",
-      "country_of_origin": null,
+      "country_of_origin": "France",
       "weave_type": "Handwoven",
       "materials": [
         "Wool"
       ],
       "year_produced": null,
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Aubusson",
       "design": "Abussan",
       "colors": [
         "Beige",
@@ -17355,15 +17356,15 @@
       "is_sold": false,
       "width_ft": "5'8\"",
       "length_ft": "6'3\"",
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "regional_style": "Lilihan",
+      "country_of_origin": "Iran",
       "weave_type": null,
       "materials": [
         "Wool"
       ],
       "year_produced": "1920s",
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Lilihan",
       "design": null,
       "colors": [
         "Red",
@@ -17556,10 +17557,10 @@
     "source_page": 39,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
+      "width_ft": "3'6\"",
       "length_ft": "5'",
-      "regional_style": "Persian",
-      "country_of_origin": "Azerbaijan",
+      "regional_style": "Caucasus",
+      "country_of_origin": null,
       "weave_type": null,
       "materials": [
         "Wool"
@@ -17591,10 +17592,10 @@
     "source_page": 39,
     "parsed_data": {
       "is_sold": true,
-      "width_ft": null,
-      "length_ft": "4ft",
-      "regional_style": "Persian",
-      "country_of_origin": "Azerbaijan",
+      "width_ft": "4'",
+      "length_ft": "6'",
+      "regional_style": "Caucasus",
+      "country_of_origin": null,
       "weave_type": "Hand-Woven",
       "materials": [
         "100% Pure Wool"
@@ -18077,8 +18078,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": "6'8\"",
-      "regional_style": "Afghan",
-      "country_of_origin": "Azerbaijan",
+      "regional_style": "Kazak",
+      "country_of_origin": "Afghanistan",
       "weave_type": "Hand-Woven",
       "materials": [
         "Wool"
@@ -18177,8 +18178,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Tribal",
-      "country_of_origin": "Turkmenistan",
+      "regional_style": "Turkman",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [
         "Wool"
@@ -18210,8 +18211,8 @@
       "is_sold": true,
       "width_ft": "8ft",
       "length_ft": null,
-      "regional_style": "Afghan",
-      "country_of_origin": null,
+      "regional_style": "Chobi",
+      "country_of_origin": "Afghanistan",
       "weave_type": "Handwoven",
       "materials": [
         "Pure Wool"
@@ -18930,10 +18931,10 @@
     "source_page": 42,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": "9'10\"",
+      "width_ft": "9'",
+      "length_ft": "11'8\"",
       "regional_style": "Kazakh",
-      "country_of_origin": null,
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [
         "Wool"
@@ -18964,10 +18965,10 @@
     "source_page": 42,
     "parsed_data": {
       "is_sold": true,
-      "width_ft": null,
-      "length_ft": null,
+      "width_ft": "8'10\"",
+      "length_ft": "11'6\"",
       "regional_style": "Kazak",
-      "country_of_origin": null,
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -19306,8 +19307,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Tribal",
-      "country_of_origin": null,
+      "regional_style": "Kilim",
+      "country_of_origin": "Turkey",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -20138,7 +20139,7 @@
       "is_sold": true,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Tribal",
+      "regional_style": "Gabbeh",
       "country_of_origin": "Iran",
       "weave_type": null,
       "materials": [
@@ -20172,7 +20173,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Tribal",
-      "country_of_origin": null,
+      "country_of_origin": "India",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
@@ -20337,11 +20338,11 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "regional_style": "Heriz",
+      "country_of_origin": "Iran",
       "weave_type": null,
       "materials": null,
-      "year_produced": null,
+      "year_produced": "1920s",
       "primary_color": null,
       "city": "Unknown",
       "design": null,
@@ -20367,10 +20368,10 @@
     "source_page": 45,
     "parsed_data": {
       "is_sold": true,
-      "width_ft": "5ft",
-      "length_ft": null,
-      "regional_style": "Kazakh",
-      "country_of_origin": null,
+      "width_ft": "5'",
+      "length_ft": "7'",
+      "regional_style": "Kazak",
+      "country_of_origin": "Afghanistan",
       "weave_type": "Handwoven",
       "materials": [
         "Wool"
@@ -20610,13 +20611,13 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Kazak",
-      "country_of_origin": null,
+      "regional_style": "Boteh",
+      "country_of_origin": "Iran",
       "weave_type": null,
       "materials": null,
       "year_produced": null,
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Mashhad",
       "design": null,
       "colors": [
         "Pink",
@@ -20807,8 +20808,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": "16'3\"",
-      "regional_style": "Tribal",
-      "country_of_origin": "Azerbaijan",
+      "regional_style": "Caucasus",
+      "country_of_origin": null,
       "weave_type": "Hand-Woven",
       "materials": [],
       "year_produced": "1880s",
@@ -21081,7 +21082,7 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": "7ft",
-      "regional_style": "Kazakh",
+      "regional_style": "Caucasus",
       "country_of_origin": null,
       "weave_type": "Hand-Woven",
       "materials": [
@@ -21211,9 +21212,9 @@
     "source_page": 46,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": "8ft",
-      "regional_style": "Heriz",
+      "width_ft": "8'",
+      "length_ft": "10'",
+      "regional_style": "Caucasus",
       "country_of_origin": null,
       "weave_type": null,
       "materials": [
@@ -21282,8 +21283,8 @@
       "is_sold": false,
       "width_ft": "8ft",
       "length_ft": null,
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "regional_style": "Chobi",
+      "country_of_origin": "Afghanistan",
       "weave_type": "Handwoven",
       "materials": [
         "Wool"
@@ -21316,7 +21317,7 @@
       "width_ft": null,
       "length_ft": null,
       "regional_style": "Khorjen",
-      "country_of_origin": null,
+      "country_of_origin": "Afghanistan",
       "weave_type": "Hand-Woven",
       "materials": [
         "Wool",
@@ -21383,10 +21384,10 @@
     "source_page": 47,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": "10'x13'",
+      "width_ft": "10'",
+      "length_ft": "13'",
       "regional_style": "Moroccan",
-      "country_of_origin": null,
+      "country_of_origin": "Morocco",
       "weave_type": "Handwoven",
       "materials": [
         "100% Pure Wool"
@@ -21450,10 +21451,10 @@
     "source_page": 47,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": "9ft",
+      "width_ft": "9'",
       "length_ft": "12'",
       "regional_style": "Moroccan",
-      "country_of_origin": null,
+      "country_of_origin": "Morocco",
       "weave_type": "Handwoven",
       "materials": [
         "Wool"
@@ -21482,10 +21483,10 @@
     "source_page": 47,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
-      "regional_style": "Turkmen",
-      "country_of_origin": null,
+      "width_ft": "8'",
+      "length_ft": "10'",
+      "regional_style": "Moroccan",
+      "country_of_origin": "Morocco",
       "weave_type": "Hand-Woven",
       "materials": [
         "100% Pure Wool",
@@ -21549,10 +21550,10 @@
     "source_page": 47,
     "parsed_data": {
       "is_sold": false,
-      "width_ft": null,
-      "length_ft": null,
+      "width_ft": "6'",
+      "length_ft": "9'",
       "regional_style": "Moroccan",
-      "country_of_origin": null,
+      "country_of_origin": "Morocco",
       "weave_type": null,
       "materials": [
         "Handwoven"
@@ -21918,8 +21919,8 @@
       "is_sold": false,
       "width_ft": "8ft",
       "length_ft": "10ft",
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "regional_style": "Chobi",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [],
       "year_produced": null,
@@ -21951,8 +21952,8 @@
       "is_sold": false,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Heriz",
-      "country_of_origin": null,
+      "regional_style": "Art Deco",
+      "country_of_origin": "China",
       "weave_type": null,
       "materials": [],
       "year_produced": null,
@@ -22360,8 +22361,8 @@
       "is_sold": true,
       "width_ft": null,
       "length_ft": null,
-      "regional_style": "Persian",
-      "country_of_origin": null,
+      "regional_style": "Chobi",
+      "country_of_origin": "Afghanistan",
       "weave_type": null,
       "materials": [],
       "year_produced": null,
@@ -27295,8 +27296,8 @@
       "is_sold": false,
       "width_ft": "2'7\"",
       "length_ft": "3'7\"",
-      "regional_style": "Persian",
-      "country_of_origin": "Native American",
+      "regional_style": "Native American",
+      "country_of_origin": "United States",
       "weave_type": null,
       "materials": [
         "Unknown"
