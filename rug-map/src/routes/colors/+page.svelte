@@ -2,6 +2,9 @@
 <script>
   import { COLOR_CONFIG, getRugNormalizedColors } from '$lib/colorMap.js';
   import ViewNav from '$lib/ViewNav.svelte';
+  import { base } from '$app/paths';
+  import RugCard from '$lib/components/RugCard.svelte';
+
 
   let rugData = $state([]);
   let selectedColors = $state([]); // Stores array of active color keys
@@ -10,7 +13,7 @@
   // Load JSON Data
   $effect(() => {
     async function loadData() {
-      const res = await fetch('/rugs_with_image_analysis.json');
+      const res = await fetch(`${base}/rugs_with_image_analysis.json`);      
       rugData = await res.json();
     }
     loadData();
@@ -154,31 +157,7 @@
 
     <div class="rug-grid">
       {#each activeRugs as rug (rug.id || rug.name)}
-        <div class="rug-card">
-          <div class="img-wrapper">
-            {#if rug.image_url}
-              <img src={rug.image_url} alt={rug.name} loading="lazy" />
-            {:else}
-              <div class="no-img">No Image Available</div>
-            {/if}
-          </div>
-          <div class="card-info">
-            <h4>{rug.name || 'Rug Item'}</h4>
-            <span class="city-tag">{rug.parsed_data?.city || 'Unknown Origin'}</span>
-            
-            <div class="colors-list">
-              {#each getRugNormalizedColors(rug) as cKey}
-                <span 
-                  class="chip"
-                  class:highlight={selectedColors.includes(cKey)}
-                >
-                  <span class="chip-dot" style="background-color: {COLOR_CONFIG[cKey]?.hex};"></span>
-                  {COLOR_CONFIG[cKey]?.label || cKey}
-                </span>
-              {/each}
-            </div>
-          </div>
-        </div>
+        <RugCard {rug} />
       {/each}
     </div>
   </main>

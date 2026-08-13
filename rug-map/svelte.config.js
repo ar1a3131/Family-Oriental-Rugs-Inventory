@@ -4,6 +4,10 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: vitePreprocess(),
+  compilerOptions: {
+    runes: ({ filename }) =>
+      filename.split(/[/\\]/).includes('node_modules') ? undefined : true
+  },
   kit: {
     adapter: adapter({
       pages: 'build',
@@ -13,7 +17,11 @@ const config = {
       strict: true
     }),
     paths: {
-      base: process.env.NODE_ENV === 'production' ? '/Family-Oriental-Rugs-Inventory' : ''
+      base: process.env.NODE_ENV === 'production' && process.env.GITHUB_ACTIONS ? '/Rug-Map' : '',
+      relative: true
+    },
+    prerender: {
+      handleHttpError: 'warn'
     }
   }
 };

@@ -1,16 +1,17 @@
 <!-- src/lib/ViewNav.svelte -->
 <script>
   import { page } from '$app/stores';
+  import { base } from '$app/paths';
 </script>
 
 <nav class="view-nav">
-  <a href="/" class="nav-btn" class:active={$page.url.pathname === '/'}>
+  <a href="{base}/" class="nav-btn" class:active={$page.url.pathname === '/'}>
     🗺️ Map View
   </a>
-  <a href="/colors" class="nav-btn" class:active={$page.url.pathname === '/colors'}>
+  <a href="{base}/colors" class="nav-btn" class:active={$page.url.pathname === '/colors'}>
     🎨 Colors
   </a>
-  <a href="/styles" class="nav-btn" class:active={$page.url.pathname === '/styles'}>
+  <a href="{base}/styles" class="nav-btn" class:active={$page.url.pathname === '/styles'}>
     🏷️ Styles
   </a>
 </nav>
