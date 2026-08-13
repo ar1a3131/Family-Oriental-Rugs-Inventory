@@ -174,7 +174,7 @@
   :global(.pin-badge) {
     display: inline-flex; 
     align-items: center;
-    background: #ffffff;
+    /* background: #ffffff; */
     border-radius: 20px; 
     padding: 3px 10px 3px 4px; 
     border: 2px solid #ffffff;
