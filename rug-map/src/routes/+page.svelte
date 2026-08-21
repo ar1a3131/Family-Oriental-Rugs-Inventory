@@ -44,29 +44,31 @@
 <div class="layout">
   <aside class="sidebar">
     <header class="sidebar-header">
-      <h2>Family Rug Inventory - Data Exploration</h2>
+      <h2>Our Rug Inventory 𖢫</h2>
       
-      <a 
-        href="https://baseerorientalrugs.com" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="store-link-btn"
-        title="Visit Baseer Oriental Rugs Store"
-      >
-        <span>🌐 Baseer Oriental Rugs</span>
-        <span class="external-arrow">↗</span>
-      </a>
+      <div class="link-group">
+        <a 
+          href="https://baseerorientalrugs.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="store-link-btn"
+          title="Visit Baseer Oriental Rugs Store"
+        >
+          <span>🌐 Family Business</span>
+          <span class="external-arrow">↗</span>
+        </a>
 
-      <a 
-        href="https://github.com/ar1a3131/Family-Oriental-Rugs-Inventory" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="store-link-btn"
-        title="Visit my GitHub repo"
-      >
-        <span>👾 Project GitHub Repo</span>
-        <span class="external-arrow">↗</span>
-      </a>
+        <a 
+          href="https://github.com/ar1a3131/Family-Oriental-Rugs-Inventory" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="store-link-btn"
+          title="Visit my GitHub repo"
+        >
+          <span>👾 Project GitHub Repo</span>
+          <span class="external-arrow">↗</span>
+        </a>
+      </div>
 
       <ViewNav />
       <p class="subtitle">Total Rugs: <strong>{rugData.length}</strong></p>
@@ -144,20 +146,29 @@
 </div>
 
 <style>
-  :global(body) { 
+  :global(body) { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; }
+  .layout { display: flex; height: 100vh; }
+  .sidebar { width: 340px; padding: 1.5rem; overflow-y: auto; border-right: 1px solid #e2e8f0; background: #ffffff; flex-shrink: 0; display: flex; flex-direction: column; }
+  
+  .sidebar-header h2 { margin: 0; font-size: 1.2rem; color: #0f172a; }
+  .subtitle { color: #64748b; font-size: 0.85rem; margin: 0.25rem 0 1rem 0; }
+
+
+
+  /* :global(body) { 
     margin: 0; 
     padding: 0; 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
     background: #f8fafc; 
-  }
+  } */
 
-  .layout { 
+  /* .layout { 
     display: flex; 
     height: 100vh; 
-  }
+  } */
 
   /* Consolidated Sidebar Rules */
-  .sidebar { 
+  /* .sidebar { 
     width: 380px; 
     padding: 1.25rem; 
     overflow-y: auto; 
@@ -167,13 +178,17 @@
     display: flex; 
     flex-direction: column; 
     flex-shrink: 0;
-  }
+  } */
 
-  .sidebar-header h2 { 
+
+
+
+
+  /* .sidebar-header h2 { 
     margin: 0; 
     font-size: 1.2rem; 
     color: #0f172a; 
-  }
+  } */
 
   .subtitle { 
     color: #64748b; 
@@ -181,14 +196,21 @@
     margin: 0.4rem 0 0.8rem 0; 
   }
 
+  .link-group {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem 0;
+  width: 100%;
+}
+
   /* Store & GitHub Link Buttons */
   .store-link-btn {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 0.3rem;
     margin: 0.4rem 0;
-    padding: 0.4rem 0.75rem;
+    padding: 0.5rem 0.5rem;
     font-size: 0.78rem;
     font-weight: 600;
     color: #1e293b;
@@ -209,7 +231,7 @@
   }
 
   .external-arrow {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #64748b;
     transition: transform 0.15s ease;
   }

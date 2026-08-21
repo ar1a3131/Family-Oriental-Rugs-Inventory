@@ -71,16 +71,41 @@
 <div class="layout">
   <aside class="sidebar">
     <div class="sidebar-header">
-      <h2>Family Rug Inventory</h2>
-      <p class="subtitle">Total Rugs: <strong>{rugData.length}</strong></p>
+      <h2>Our Rug Inventory 𖢫</h2>
     </div>
 
+
+    <div class="link-group">
+        <a 
+          href="https://baseerorientalrugs.com" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="store-link-btn"
+          title="Visit Baseer Oriental Rugs Store"
+        >
+          <span>🌐 Family Business</span>
+          <span class="external-arrow">↗</span>
+        </a>
+
+        <a 
+          href="https://github.com/ar1a3131/Family-Oriental-Rugs-Inventory" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="store-link-btn"
+          title="Visit my GitHub repo"
+        >
+          <span>👾 Project GitHub Repo</span>
+          <span class="external-arrow">↗</span>
+        </a>
+      </div>
+      
     <!-- View Navigation -->
     <!-- <nav class="view-nav">
       <a href="/" class="nav-btn">🗺️ Map View (Homepage)</a>
       <a href="/colors" class="nav-btn active">🎨 View by Color</a>
     </nav> -->
     <ViewNav />
+    <p class="subtitle">Total Rugs: <strong>{rugData.length}</strong></p>
 
 
     <!-- Filter Header & Controls -->
@@ -170,6 +195,33 @@
   
   .sidebar-header h2 { margin: 0; font-size: 1.2rem; color: #0f172a; }
   .subtitle { color: #64748b; font-size: 0.85rem; margin: 0.25rem 0 1rem 0; }
+
+  .link-group {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem 0;
+  width: 100%;
+}
+
+/* Store & GitHub Link Buttons */
+  .store-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3rem;
+    margin: 0.4rem 0;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1e293b;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    width: fit-content;
+  }
+
 
   /* Navigation Tabs */
   /* .view-nav { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; background: #f1f5f9; padding: 4px; border-radius: 8px; }
