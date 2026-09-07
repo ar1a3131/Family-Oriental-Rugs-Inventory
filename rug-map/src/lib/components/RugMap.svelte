@@ -34,13 +34,25 @@
 
       L.control.zoom({ position: 'topright' }).addTo(instance);
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CARTO',
-        subdomains: 'abcd',
+      // carto is now requiring an API key
+      // L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      //   attribution: '&copy; OpenStreetMap &copy; CARTO',
+      //   subdomains: 'abcd',
+      //   maxZoom: 19,
+      //   noWrap: true,
+      //   bounds: worldBounds
+      // }).addTo(instance);
+
+      const cartoApiKey = 'YOUR_FREE_CARTO_API_KEY';
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+        subdomains: 'abc', 
         maxZoom: 19,
         noWrap: true,
         bounds: worldBounds
       }).addTo(instance);
+
 
       layerGroup = L.layerGroup().addTo(instance);
       mapInstance = instance;
