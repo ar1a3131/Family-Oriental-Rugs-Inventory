@@ -78,9 +78,9 @@
     "source_page": 1,
     "parsed_data": {
       "is_sold": true,
-      "width_ft": null,
-      "length_ft": null,
-      "regional_style": "Persian",
+      "width_ft": "7'10\"",
+      "length_ft": "17'7\"",
+      "regional_style": "Hamadan",
       "country_of_origin": "Iran",
       "weave_type": "Hand-Knotted",
       "materials": [
@@ -89,7 +89,7 @@
       ],
       "year_produced": "circa 1900s",
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Bibikabad",
       "design": "Traditional Persian design",
       "colors": [
         "Navy Blue",
@@ -8923,7 +8923,7 @@
       ],
       "year_produced": "1950s",
       "primary_color": null,
-      "city": "Unknown",
+      "city": "Heriz",
       "design": "Geometric"
     }
   },

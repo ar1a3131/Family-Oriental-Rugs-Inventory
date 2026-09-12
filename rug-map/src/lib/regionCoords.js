@@ -22,5 +22,6 @@ export const REGION_COORDS = {
   // @ts-ignore
   'Caucasus': { lat: 42.0000, lng: 45.0000, radius: 420000, color: '#8b5cf6' },
   'Bessarabian': { lat: 50.22, lng: 37.58, radius: 1150000, color: '#00d5ff' },
-  'Bakhtiari': { lat: 32.1500, lng: 50.8500, radius: 50000, color: '#a855f7' }
+  'Bakhtiari': { lat: 32.1500, lng: 50.8500, radius: 50000, color: '#a855f7' },
+  'Hamadan': { lat: 34.7981, lng: 48.5150, radius: 50000, color: '#f59e0b' }
 };
